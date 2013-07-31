@@ -47,3 +47,4 @@ end
 
 gem "acts-as-taggable-on"
 gem "kaminari"
+gem 'devise'
