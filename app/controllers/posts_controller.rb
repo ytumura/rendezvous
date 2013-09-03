@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post.content = StringParse.md2html(@post.content)
   end
 
   # GET /posts/new
@@ -35,7 +36,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.tag_list = StringParse.tags(@post.content)
+    @post.tag_list = StringParse.tags(params['tags'], '#')
+    @post.user_list = StringParse.tags(params['users'], '@')
 
     respond_to do |format|
       if @post.save
@@ -56,6 +58,8 @@ class PostsController < ApplicationController
         raise unless @post.update(post_params)
 
         @post.tag_list = StringParse.tags(@post.content)
+        @post.tag_list = StringParse.tags(params['tags'], '#')
+        @post.user_list = StringParse.tags(params['users'], '@')
         raise unless @post.save
       rescue
         format.html { render action: 'edit' }

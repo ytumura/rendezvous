@@ -8,6 +8,16 @@
 </p>
 
 <p>
+  <strong>Tags:</strong>
+  <%= @post.tag_list.join(', ') %>
+</p>
+
+<p>
+  <strong>Users:</strong>
+  <%= @post.user_list.join(', ') %>
+</p>
+
+<p>
   <strong>Content:</strong>
   <%= @post.content %>
 </p>

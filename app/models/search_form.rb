@@ -5,7 +5,7 @@ class SearchForm
 
 
   def tag?
-    return true if q[0] == '#'
+    return true if '#@'.include?(q[0])
     return false
   end
 end
