@@ -4,7 +4,17 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @search_form = SearchForm.new params[:search_form] 
     @posts = Post.all
+
+    if @search_form.q.present?
+      if @search_form.tag?
+        @posts = @posts.search_tag @search_form.q
+      else
+        @posts = @posts.search_content @search_form.q
+      end
+    end
+    @posts = @posts.by_join_date
   end
 
   # GET /posts/1
