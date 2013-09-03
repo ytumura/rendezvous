@@ -25,6 +25,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.tag_list = StringParse.tags(@post.content)
 
     respond_to do |format|
       if @post.save
@@ -41,12 +42,17 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
+      begin
+        raise unless @post.update(post_params)
+
+        @post.tag_list = StringParse.tags(@post.content)
+        raise unless @post.save
+      rescue
         format.html { render action: 'edit' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.json { head :no_content }
       end
     end
   end
