@@ -1,7 +1,5 @@
 class RootController < ApplicationController
   def index
-    if not current_user
-      redirect_to new_user_session_path
-    end
+    @tags = Post.tag_counts_on(:tags)[0..3]
   end
 end

@@ -1,0 +1,14 @@
+<h1>Listing tags</h1>
+
+<%= render :partial => "/_parts/links" %>
+
+<br />
+
+<%- @posts.each do |post| %>
+  <p>
+  <%= link_to post.title, post %><br />
+  <%= post.content_html %><br />
+  </p>
+<%- end %>
+
+

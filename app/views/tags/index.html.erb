@@ -1,0 +1,12 @@
+<h1>Listing tags</h1>
+
+<%= render :partial => "/_parts/links" %>
+
+<br />
+
+<%- @tags.each do |tag| %>
+  <p>
+  <%= link_to tag.name, "/tags/#{tag.name[1..-1]}" %>
+  </p>
+<%- end %>
+

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @search_form = SearchForm.new params[:search_form] 
-    @posts = Post.all
+    @posts = Post.having(current_user)
 
     if @search_form.q.present?
       if @search_form.tag?
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post.content = StringParse.md2html(@post.content)
+    #@post.content = StringParse.md2html(@post.content)
   end
 
   # GET /posts/new
@@ -36,6 +36,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
     @post.tag_list = StringParse.tags(params['tags'], '#')
     @post.user_list = StringParse.tags(params['users'], '@')
 
@@ -79,6 +80,12 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  def user
+    user = User.find(params[:usr_id])
+    @posts = Post.having(user)
+    @search_form = SearchForm.new params[:search_form] 
   end
 
   private
