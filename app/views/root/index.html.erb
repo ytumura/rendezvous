@@ -11,9 +11,26 @@
 
 <%= render :partial => "/_parts/links" %>
 
-<br />
 
+<p>
+<h2>Your Latets Posts</h2>
+<%- @my_posts.each do |post|%>
+  <%= link_to "#{post.title}", post %><br />
+<%- end%>
+</p>
+
+<p>
+<h2>All Latets Posts</h2>
+<%- @posts.each do |post|%>
+  <%= link_to "#{post.title}", post %><br />
+<%- end%>
+</p>
+
+
+<p>
+<h2>Tag Cloud</h2>
 <% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-	<%= link_to tag.name, "/tags/#{tag.name[1..-1]}", :class => css_class %>
-	<br />
+  <%= link_to tag.name, "/tags/#{tag.name[1..-1]}", :class => css_class %>
+  <br />
 <% end %>
+</p>
