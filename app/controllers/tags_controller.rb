@@ -5,6 +5,6 @@ class TagsController < ApplicationController
   end
 
   def list
-    @posts = Post.search_tag("##{params[:tag_name]}").by_join_date
+    @posts = Post.search_tag("##{params[:tag_name]}").desc
   end
 end

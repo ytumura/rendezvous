@@ -14,7 +14,7 @@ class PostsController < ApplicationController
         @posts = @posts.search_content @search_form.q
       end
     end
-    @posts = @posts.by_join_date
+    @posts = @posts.desc
   end
 
   # GET /posts/1
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @post.tag_list = StringParse.tags(params['tags'], '#')
-    @post.user_list = StringParse.tags(params['users'], '@')
+    @post.user_list = StringParse.tags(params['users'])
 
     respond_to do |format|
       if @post.save
