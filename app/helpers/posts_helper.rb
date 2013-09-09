@@ -3,7 +3,7 @@ module PostsHelper
   end
 
   def link_users(users)
-    users.
-    link_to post.user.name, "/posts/user/#{post.user_id}"
+    # リンク場所無いので一端名前だけ
+    users.user_list.map{|user|user.to_i > 0 ? "@"+User.find(user).name : "@"+user}.join(', ')
   end
 end

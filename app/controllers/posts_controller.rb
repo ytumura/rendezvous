@@ -38,7 +38,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @post.tag_list = StringParse.tags(params['tags'], '#')
-    @post.user_list = StringParse.tags(params['users'])
+    #@post.user_list = StringParse.tags(params['users'])
+    users = StringParse.tags(params['users']).split(',')
+    users = users.map{|user|obj = User.find_by(name: user); obj.present? ? obj.id : user}
+    @post.user_list = users
 
     respond_to do |format|
       if @post.save

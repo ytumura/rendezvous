@@ -2,7 +2,8 @@ class StringParse
   def self.tags(str, mark=nil)
     return "" if str.blank?
     tags = str.gsub(/,/, ' ').split.uniq
-    tags.map{|tag|tag[0]==mark ? tag : mark+tag}.join(",") if mark.present?
+    tags = tags.map{|tag|tag[0]==mark ? tag : mark+tag} if mark.present?
+    tags.join(',')
   end
 
   def self.md2html(str)
