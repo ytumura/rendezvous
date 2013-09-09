@@ -15,18 +15,30 @@
 <%- if @my_posts.present? %>
 <p>
 <h2>Your Latets Posts</h2>
-<%- @my_posts.each do |post|%>
-  <%= link_to "#{post.title}", post %><br />
+<div class="list-group">
+<%- @my_posts.each_with_index do |post, i|%>
+  <%- if i == 0 %>
+  <%= link_to "#{post.title}", post, { :class => "list-group-item active" }  %><br />
+  <%- else %>
+  <%= link_to "#{post.title}", post, { :class => "list-group-item" }  %><br />
+  <%- end %>
 <%- end%>
+</div>
 </p>
 <%- end %>
 
 <%- if @posts.present? %>
 <p>
 <h2>All Latets Posts</h2>
-<%- @posts.each do |post|%>
-  <%= link_to "#{post.title}", post %><br />
+<div class="list-group">
+<%- @posts.each_with_index do |post, i|%>
+  <%- if i == 0 %>
+  <%= link_to "#{post.title}", post, { :class => "list-group-item active" }  %><br />
+  <%- else %>
+  <%= link_to "#{post.title}", post, { :class => "list-group-item" }  %><br />
+  <%- end %>
 <%- end %>
+</div>
 </p>
 <%- end %>
 
