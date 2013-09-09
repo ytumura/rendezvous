@@ -1,12 +1,47 @@
 <h1>Listing tags</h1>
 
+<style type="text/css">
+<!--
+.css1 { font-size: 1.0em; }
+.css2 { font-size: 1.2em; }
+.css3 { font-size: 1.4em; }
+.css4 { font-size: 1.6em; }
+  -->
+</style>
+
+<%= render :partial => "/_parts/header" %>
 <%= render :partial => "/_parts/links" %>
 
-<br />
+<%= form_for @search_form, url: posts_path, html: {method: :get} do |f| %>
+  <%= f.search_field :q %>
+  <%= f.submit "search" %>
+<% end %>
 
-<%- @tags.each do |tag| %>
-  <p>
-  <%= link_to tag.name, "/tags/#{tag.name[1..-1]}" %>
-  </p>
+<%- if @my_posts.present? %>
+<p>
+<h2>Your Latets Posts</h2>
+<%- @my_posts.each do |post|%>
+  <%= link_to "#{post.title}", post %><br />
+<%- end%>
+</p>
 <%- end %>
 
+<%- if @posts.present? %>
+<p>
+<h2>All Latets Posts</h2>
+<%- @posts.each do |post|%>
+  <%= link_to "#{post.title}", post %><br />
+<%- end %>
+</p>
+<%- end %>
+
+
+<%- if tag_count > 0 %>
+  <p>
+  <h2>Tag Cloud</h2>
+  <%- tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+    <%= link_to tag.name, "/tags/#{tag.name[1..-1]}", :class => css_class %>
+    <br />
+  <%- end %>
+  </p>
+<%- end %>

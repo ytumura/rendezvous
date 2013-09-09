@@ -1,5 +1,6 @@
 <h1>Listing posts</h1>
 
+<%= render :partial => "/_parts/header" %>
 <%= render :partial => "/_parts/links" %>
 
 <%= form_for @search_form, url: posts_path, html: {method: :get} do |f| %>
