@@ -1,5 +1,5 @@
 Rendezvous::Application.routes.draw do
-  devise_for :users
+  #devise_for :users
   resources :posts
 
   root 'root#index'
@@ -8,9 +8,7 @@ Rendezvous::Application.routes.draw do
   get 'tags/' => 'tags#index', as: "tag_root"
   get 'tags/:tag_name' => 'tags#list', as: "tag_list"
 
-  #devise_for :users do
-  #  get "/login" => "devise/sessions#new"
-  #  get "/logout" => "devise/sessions#destroy"
-  #  get "/register" => "devise/registrations#new"
-  #end
+  devise_for :users, controllers: {
+      registrations: 'custom_devise/registrations'
+  }
 end
