@@ -1,5 +1,11 @@
-<p>
-<%= user_info %>
-<%= link_to 'LogOut', destroy_user_session_path %>
-</p>
-
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+  <li class="active"><%= link_to 'Logout', destroy_user_session_path %></li>
+  <%- if false %>
+  <li><%= user_info %></li>
+  <li><a href="#">About</a></li>
+  <li><a href="#">Contact</a></li>
+  <%- end %>
+  </ul>
+  <h3 class="text-muted"><%= link_to "Rendezvous", root_path %>(<%= current_user.name%>)</h3>
+</div>

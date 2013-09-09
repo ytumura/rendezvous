@@ -1,5 +1,7 @@
-<p>
-<%= link_to 'Top', root_path %>
-<%= link_to 'Search', tag_root_path %>
-<%= link_to 'Post', new_post_path %>
-</p>
+<div class="col-md-3">
+  <div class="btn-group-vertical">
+    <button type="button" class="btn btn-default"><%= link_to 'Top', root_path %></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Search', tag_root_path %></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Post', new_post_path %></button>
+  </div>
+</div>

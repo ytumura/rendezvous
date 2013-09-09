@@ -8,7 +8,15 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <%= render :partial => "/_parts/header" %>
+  <div class="row">
+    <%= render :partial => "/_parts/links" %>
+    <div class="col-md-9">
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

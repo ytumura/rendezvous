@@ -49,3 +49,4 @@ gem "acts-as-taggable-on"
 gem "kaminari"
 gem 'devise'
 gem 'redcarpet'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
