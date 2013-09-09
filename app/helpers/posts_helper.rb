@@ -4,6 +4,6 @@ module PostsHelper
 
   def link_users(users)
     # リンク場所無いので一端名前だけ
-    users.user_list.map{|user|user.to_i > 0 ? "@"+User.find(user).name : "@"+user}.join(', ')
+    users.user_list.map{|user|"@"+User.find(user[1..-1]).name}.join(', ')
   end
 end

@@ -9,12 +9,16 @@ class PostsController < ApplicationController
 
     if @search_form.q.present?
       if @search_form.tag?
-        @posts = @posts.search_tag @search_form.q
+        @posts = @posts.search_tag(@search_form.q)
+      elsif @search_form.user?
+        name = @search_form.q[1..-1]
+        user = User.find_by(name: name)
+        @posts = @posts.search_tag("@#{user.id}")
       else
-        @posts = @posts.search_content @search_form.q
+        @posts = @posts.search_content(@search_form.q)
+        @posts = @posts.desc
       end
     end
-    @posts = @posts.desc
   end
 
   # GET /posts/1
@@ -40,8 +44,8 @@ class PostsController < ApplicationController
     @post.tag_list = StringParse.tags(params['tags'], '#')
     #@post.user_list = StringParse.tags(params['users'])
     users = StringParse.tags(params['users']).split(',')
-    users = users.map{|user|obj = User.find_by(name: user); obj.present? ? obj.id : user}
-    @post.user_list = users
+    users = users.inject([]){|ary, user|obj = User.find_by(name: user); obj.present? ? ary << "@#{obj.id}" : ary}
+    @post.user_list = users.join(',')
 
     respond_to do |format|
       if @post.save
