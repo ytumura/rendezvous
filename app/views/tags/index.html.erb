@@ -14,11 +14,11 @@
 
 <%- if @my_posts.present? %>
 <p>
-<h2>Your Latets Posts</h2>
 <div class="list-group">
+<h2 class="list-group-item active">Your Latets Posts</h2>
 <%- @my_posts.each_with_index do |post, i|%>
   <%- if i == 0 %>
-  <%= link_to "#{post.title}", post, { :class => "list-group-item active" }  %>
+  <%= link_to "#{post.title}", post, { :class => "list-group-item" }  %>
   <%- else %>
   <%= link_to "#{post.title}", post, { :class => "list-group-item" }  %>
   <%- end %>
@@ -29,11 +29,11 @@
 
 <%- if @posts.present? %>
 <p>
-<h2>All Latets Posts</h2>
 <div class="list-group">
+<h2 class="list-group-item active">All Latets Posts</h2>
 <%- @posts.each_with_index do |post, i|%>
   <%- if i == 0 %>
-  <%= link_to "#{post.title}", post, { :class => "list-group-item active" }  %>
+  <%= link_to "#{post.title}", post, { :class => "list-group-item" }  %>
   <%- else %>
   <%= link_to "#{post.title}", post, { :class => "list-group-item" }  %>
   <%- end %>
@@ -45,9 +45,15 @@
 
 <%- if tag_count > 0 %>
   <p>
-  <h2>Tag Cloud</h2>
-  <%- tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-    <%= link_to tag.name, "/tags/#{tag.name[1..-1]}", :class => css_class %>
-  <%- end %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Tag Cloud
+    </div>
+    <div class="panel-body">
+      <%- tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+        <%= link_to tag.name, "/tags/#{tag.name[1..-1]}", :class => css_class %>
+      <%- end %>
+    </div>
+  </div>
   </p>
 <%- end %>
