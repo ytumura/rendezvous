@@ -11,9 +11,9 @@ class Post < ActiveRecord::Base
     Post.all.where(user_id: user.id)
   end
 
-  def user(id)
-    User.find(id)
-  end
+  #def user(id)
+  #  User.find(id)
+  #end
 
   def user=(obj)
     self.user_id = obj.id

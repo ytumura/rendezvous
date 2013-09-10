@@ -44,6 +44,10 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :test do
+  gem 'spring'
+  gem 'rspec-rails'
+end
 
 gem "acts-as-taggable-on"
 gem "kaminari"
