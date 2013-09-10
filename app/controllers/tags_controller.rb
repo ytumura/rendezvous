@@ -4,7 +4,11 @@ class TagsController < ApplicationController
     @my_posts = Post.having(current_user).desc.limit(10)
     @tags = Post.tag_counts_on(:tags)[0..3]
     @search_form = SearchForm.new params[:search_form] 
+  end
 
+  def search
+    @posts = Post.all.desc
+    @search_form = SearchForm.new params[:search_form] 
     if @search_form.q.present?
       if @search_form.tag?
         @posts = @posts.search_tag(@search_form.q)

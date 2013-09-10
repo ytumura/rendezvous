@@ -1,28 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_post_path(@post) %>
-
-<table class="table">
-</table>
-
 <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-info"><%= @post.title %></h2>
+    <%= link_to 'Edit', edit_post_path(@post) %>
+  </div>
+</div>
 </p>
 
 <p>
-  <strong>Tags:</strong>
-  <%- @post.tags.each do |tag| %>
-    <%= link_to tag.name, "/tags/#{tag.name[1..-1]}" %>
-  <%- end %>
+<div class="row">
+  <div class="col-md-6">
+    <%- if @post.tag_list.present? %>
+      <strong>Tags:</strong><br />
+      <%- @post.tags.each do |tag| %>
+        <%= link_to tag.name, "/tags/#{tag.name[1..-1]}" %>
+      <%- end %>
+    <%- end %>
+  </div>
+  <div class="col-md-6">
+    <%- if @post.user_list.present? %>
+      <strong>Users:</strong><br />
+      <%= link_users @post %>
+    <%- end %>
+  </div>
+</div>
 </p>
 
-<p>
-  <strong>Users:</strong>
-  <%= link_users @post %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content_html %>
-</p>
+<div class="jumbotron">
+  <div class="container">
+    <%= @post.content_html %>
+  </div>
+</div>
