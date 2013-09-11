@@ -1,12 +1,12 @@
-<h1>Listing tags</h1>
+<h1>#<%=@tag_name%>'s List</h1>
 
-<br />
-
-<%- @posts.each do |post| %>
-  <p>
-  <%= link_to post.title, post %><br />
-  <%= post.content_html %><br />
-  </p>
-<%- end %>
+<div class="list-group">
+  <%- @posts.each do |post| %>
+    <a href="/posts/<%=post.id%>" class="list-group-item">
+      <h4 class="list-group-item-heading"><%=post.title%></h4>
+      <p class="list-group-item-text"><%= post.content_html %></p>
+    </a>
+  <%- end %>
+</div>
 
 
