@@ -3,7 +3,9 @@
 
 <div class="row list-group">
 <h2 class="col-md-12 list-group-item active"><%= @post.title %></h2>
+  <%- if @post.user_id == current_user  %>
     <%= link_to 'Edit', edit_post_path(@post) %>
+  <%- end %>
 </div>
 
 <div class="row list-group">
