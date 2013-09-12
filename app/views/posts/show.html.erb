@@ -1,35 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<div class="row">
-  <div class="col-md-12">
-    <h2 class="text-info"><%= @post.title %></h2>
-    <%= link_to 'Edit', edit_post_path(@post) %>
-  </div>
-</div>
-</p>
 
-<p>
-<div class="row">
-  <div class="col-md-6">
+<div class="row list-group">
+<h2 class="col-md-12 list-group-item active"><%= @post.title %></h2>
+    <%= link_to 'Edit', edit_post_path(@post) %>
+</div>
+
+<div class="row list-group">
+  <div class="col-md-6 list-group-item">
+    <strong>Tags:</strong><br />
     <%- if @post.tag_list.present? %>
-      <strong>Tags:</strong><br />
       <%- @post.tags.each do |tag| %>
         <%= link_to tag.name, "/tags/#{tag.name[1..-1]}" %>
       <%- end %>
     <%- end %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 list-group-item">
+    <strong>Users:</strong><br />
     <%- if @post.user_list.present? %>
-      <strong>Users:</strong><br />
       <%= link_users @post %>
     <%- end %>
   </div>
 </div>
-</p>
 
-<div class="jumbotron">
-  <div class="container">
+<div class="row list-group">
+  <div class="col-md-12 list-group-item">
     <%= @post.content_html %>
   </div>
 </div>
